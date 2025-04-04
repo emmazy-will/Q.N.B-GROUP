@@ -6,25 +6,399 @@
     <title>Shipment Tracking | Q.N.B Transport</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #003366;
+            --secondary: #22272a;
+        }
+        
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 0.8rem 0;
+        }
+
+        .navbar-brand img {
+            height: 50px;
+            transition: transform 0.3s ease;
+            border-radius: 50%;
+        }
+
+        .navbar-brand:hover img {
+            transform: scale(1.05);
+        }
+
+        .nav-link {
+            color: rgba(255,255,255,0.85);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            margin: 0 0.2rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: #fff;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 1rem;
+            width: calc(100% - 2rem);
+            height: 2px;
+            background: #fff;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            transform: scaleX(1);
+        }
+
+        .navbar-toggler {
+            border: none;
+            padding: 0.5rem;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a3a6a 100%);
+            color: white;
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 3rem;
+        }
+
+        .page-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Q50,80 0,100 Z" fill="rgba(255,255,255,0.05)"/></svg>') no-repeat;
+            background-size: 100% 100%;
+            opacity: 0.5;
+        }
+
+        /* Tracking Form Styles */
+        .tracking-card {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress {
+            border-radius: 5px;
+        }
+
+        /* Timeline Styles */
+        .timeline-vertical {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline-vertical::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 10px;
+            width: 2px;
+            background-color: var(--primary);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            border: 2px solid white;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-left: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 10px;
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-right: 10px solid white;
+        }
+
+        .timeline-date {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+
+        /* Map Styles */
+        #map {
+            z-index: 0;
+        }
+
+        /* Footer Styles */
+        footer {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            color: white;
+            padding: 4rem 0 0;
+            font-size: 0.95rem;
+        }
+
+        .footer-logo {
+            width: 80px;
+            height: auto;
+            margin-bottom: 1.5rem;
+            border-radius: 50%;
+        }
+
+        .footer-col {
+            margin-bottom: 2.5rem;
+        }
+
+        .footer-heading {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
+
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background: rgba(255,255,255,0.3);
+        }
+
+        .footer-links {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+            transform: translateX(5px);
+        }
+
+        .footer-contact i {
+            width: 24px;
+            text-align: center;
+            margin-right: 10px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .footer-contact p {
+            margin-bottom: 1rem;
+            color: rgba(255,255,255,0.7);
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            color: rgba(255,255,255,0.7);
+            background: rgba(255,255,255,0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #fff;
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+        }
+
+        .footer-legal-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .footer-legal-links a {
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-legal-links a:hover {
+            color: #fff;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 767.98px) {
+            .footer-col {
+                text-align: center;
+            }
+            
+            .footer-heading::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .footer-links a:hover {
+                transform: none;
+            }
+            
+            .footer-contact p {
+                justify-content: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            .footer-legal-links {
+                margin-top: 1rem;
+            }
+            
+            .navbar-brand img {
+                height: 40px;
+            }
+            
+            .page-header {
+                padding: 4rem 0;
+            }
+
+            .timeline-vertical {
+                padding-left: 20px;
+            }
+
+            .timeline-vertical::before {
+                left: 5px;
+            }
+
+            .timeline-item::before {
+                left: 1px;
+            }
+
+            .timeline-content {
+                margin-left: 15px;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 991.98px) {
+            .footer-col {
+                margin-bottom: 2.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Top Bar (same as index.html) -->
-    <!-- Navigation (same as index.html) -->
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" id="mainNavbar">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img id="logo-footer" src="/images/QNB LOGO-2.png" alt="Q.N.B Transport" class="img-fluid" style="max-height: 60px;">    
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="services.html">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="analytics.html">Analytics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="tracking.html">Tracking</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                        <button class="btn btn-light rounded-pill px-4 fw-bold">Get Quote</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
     <!-- Page Header -->
     <section class="page-header">
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                    <h1>Shipment Tracking</h1>
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb justify-content-center">
-                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Tracking</li>
-                        </ol>
-                    </nav>
+                    <h1 class="display-4 fw-bold">Shipment Tracking</h1>
                 </div>
             </div>
         </div>
@@ -35,7 +409,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <div class="card shadow-sm border-0">
+                    <div class="card shadow-sm border-0 tracking-card">
                         <div class="card-body p-4 p-md-5">
                             <h2 class="text-center mb-4">Track Your Shipment</h2>
                             <p class="text-center text-muted mb-4">Enter your tracking number to get real-time updates on your shipment's status and location.</p>
@@ -79,23 +453,23 @@
                                                 <ul class="list-group list-group-flush">
                                                     <li class="list-group-item d-flex justify-content-between">
                                                         <span>Origin:</span>
-                                                        <strong id="origin"></strong>
+                                                        <strong id="origin">Lagos, Nigeria</strong>
                                                     </li>
                                                     <li class="list-group-item d-flex justify-content-between">
                                                         <span>Destination:</span>
-                                                        <strong id="destination"></strong>
+                                                        <strong id="destination">London, UK</strong>
                                                     </li>
                                                     <li class="list-group-item d-flex justify-content-between">
                                                         <span>Estimated Delivery:</span>
-                                                        <strong id="deliveryDate"></strong>
+                                                        <strong id="deliveryDate">June 15, 2023</strong>
                                                     </li>
                                                     <li class="list-group-item d-flex justify-content-between">
                                                         <span>Carrier:</span>
-                                                        <strong id="carrier"></strong>
+                                                        <strong id="carrier">Q.N.B Air Express</strong>
                                                     </li>
                                                     <li class="list-group-item d-flex justify-content-between">
                                                         <span>Weight:</span>
-                                                        <strong id="weight"></strong>
+                                                        <strong id="weight">45.5 kg</strong>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -105,7 +479,41 @@
                                 
                                 <h5 class="mt-4 mb-3">Tracking History</h5>
                                 <div class="timeline-vertical" id="trackingHistory">
-                                    <!-- Timeline items will be added here by JavaScript -->
+                                    <div class="timeline-item">
+                                        <div class="timeline-content">
+                                            <h6>Shipment Delivered</h6>
+                                            <p class="mb-1">Package delivered to recipient</p>
+                                            <small class="timeline-date">June 14, 2023 - 10:30 AM</small>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-content">
+                                            <h6>Out for Delivery</h6>
+                                            <p class="mb-1">Package is with the local delivery courier</p>
+                                            <small class="timeline-date">June 14, 2023 - 8:15 AM</small>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-content">
+                                            <h6>Arrived at Destination Facility</h6>
+                                            <p class="mb-1">Package processed at London distribution center</p>
+                                            <small class="timeline-date">June 13, 2023 - 4:20 PM</small>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-content">
+                                            <h6>Departed Origin Facility</h6>
+                                            <p class="mb-1">Package left Lagos airport</p>
+                                            <small class="timeline-date">June 12, 2023 - 11:45 PM</small>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-content">
+                                            <h6>Shipment Received</h6>
+                                            <p class="mb-1">Package scanned at Q.N.B Lagos facility</p>
+                                            <small class="timeline-date">June 10, 2023 - 2:30 PM</small>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             
@@ -202,10 +610,173 @@
         </div>
     </section>
 
-    <!-- Footer (same as index.html) -->
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <!-- Company Info Column -->
+                <div class="col-lg-4 col-md-6 footer-col">
+                    <img src="images/QNB LOGO-2.png" alt="Q.N.B Transport" class="footer-logo">
+                    <p class="text-white-50">Your trusted partner in global logistics and transportation solutions, delivering excellence since 2005.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links Column -->
+                <div class="col-lg-2 col-md-6 footer-col">
+                    <h5 class="footer-heading">Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="analytics.html">Analytics</a></li>
+                        <li><a href="tracking.html">Tracking</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Services Column -->
+                <div class="col-lg-3 col-md-6 footer-col">
+                    <h5 class="footer-heading">Our Services</h5>
+                    <ul class="footer-links">
+                        <li><a href="services.html#air">Air Freight</a></li>
+                        <li><a href="services.html#ocean">Ocean Freight</a></li>
+                        <li><a href="services.html#ground">Ground Shipping</a></li>
+                        <li><a href="services.html#warehouse">Warehousing</a></li>
+                        <li><a href="services.html#logistics">Logistics Solutions</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Column -->
+                <div class="col-lg-3 col-md-6 footer-col">
+                    <h5 class="footer-heading">Contact Us</h5>
+                    <div class="footer-contact">
+                        <p><i class="bi bi-geo-alt-fill"></i> 123 Logistics Way, City, ST 12345</p>
+                        <p><i class="bi bi-telephone-fill"></i> +1 (123) 456-7890</p>
+                        <p><i class="bi bi-envelope-fill"></i> info@qnbtranport.com</p>
+                        <p><i class="bi bi-clock-fill"></i> Mon-Fri: 8AM - 6PM</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        <p class="text-white-50 mb-0">&copy; 2023 Q.N.B Transport. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <div class="footer-legal-links">
+                            <a href="#">Privacy Policy</a>
+                            <a href="#">Terms of Service</a>
+                            <a href="#">Cookie Policy</a>
+                            <a href="#">Sitemap</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
+    <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
-    <script src="js/tracking.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Close mobile menu when clicking a nav link
+            const navLinks = document.querySelectorAll('.nav-link');
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+            
+            navLinks.forEach(function(navLink) {
+                navLink.addEventListener('click', function() {
+                    if (window.innerWidth < 992) {
+                        const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                            toggle: false
+                        });
+                        bsCollapse.hide();
+                    }
+                });
+            });
+            
+            // Add shadow to navbar on scroll
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.2)';
+                } else {
+                    navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+                }
+            });
+
+            // Initialize map (example coordinates)
+            const map = L.map('map').setView([51.505, -0.09], 5);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // Add route markers (example)
+            const lagos = L.marker([6.5244, 3.3792]).addTo(map)
+                .bindPopup('Origin: Lagos, Nigeria');
+            
+            const london = L.marker([51.5074, -0.1278]).addTo(map)
+                .bindPopup('Destination: London, UK');
+            
+            // Add a line connecting the points
+            const route = L.polyline([
+                [6.5244, 3.3792],
+                [51.5074, -0.1278]
+            ], {color: 'red'}).addTo(map);
+
+            // Fit the map to show all markers
+            map.fitBounds([
+                [6.5244, 3.3792],
+                [51.5074, -0.1278]
+            ]);
+
+            // Form submission handler
+            document.getElementById('trackingForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const trackingNumber = document.getElementById('trackingNumber').value;
+                
+                // Show loading state
+                document.getElementById('trackBtnText').classList.add('d-none');
+                document.getElementById('trackBtnSpinner').classList.remove('d-none');
+                document.getElementById('trackBtn').disabled = true;
+                
+                // Simulate API call
+                setTimeout(function() {
+                    // Hide loading state
+                    document.getElementById('trackBtnText').classList.remove('d-none');
+                    document.getElementById('trackBtnSpinner').classList.add('d-none');
+                    document.getElementById('trackBtn').disabled = false;
+                    
+                    // Show results (this would normally come from API response)
+                    document.getElementById('resultTrackingNumber').textContent = trackingNumber;
+                    document.getElementById('resultStatus').textContent = 'In Transit';
+                    document.getElementById('progressBar').style.width = '75%';
+                    
+                    document.getElementById('trackingResult').classList.remove('d-none');
+                    document.getElementById('noResult').classList.add('d-none');
+                }, 1500);
+            });
+
+            // Try again button handler
+            document.getElementById('tryAgainBtn').addEventListener('click', function() {
+                document.getElementById('trackingResult').classList.add('d-none');
+                document.getElementById('noResult').classList.add('d-none');
+                document.getElementById('trackingNumber').value = '';
+                document.getElementById('trackingNumber').focus();
+            });
+
+            // Print button handler
+            document.getElementById('printBtn').addEventListener('click', function() {
+                window.print();
+            });
+        });
+    </script>
 </body>
 </html>

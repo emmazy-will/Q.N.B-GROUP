@@ -183,7 +183,7 @@ img {
 
 /* Page Header */
 .page-header {
-  background: linear-gradient(rgba(23, 48, 82, 0.9), rgba(23, 48, 82, 0.9)), url('../images/header-bg.jpg');
+  background: linear-gradient(rgba(23, 48, 82, 0.9), rgba(23, 48, 82, 0.9)), ;
   background-size: cover;
   background-position: center;
   color: white;
@@ -473,7 +473,6 @@ img {
 /* ================ PAGE SPECIFIC STYLES ================ */
 /* Home Page */
 .background {
-  background-image: url('../images/bk1.avif');
   background-size: cover;
   background-position: center;
   height: 100vh;
