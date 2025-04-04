@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Q.N.B Transport | Global Shipping Solutions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        /* Prevent horizontal scrolling and set base styles */
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Responsive images and media */
+        img, iframe, video {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Container adjustments */
+        .container, .container-fluid {
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+
+        /* Top bar adjustments */
+        .top-bar {
+            font-size: 0.9rem;
+            padding: 8px 0;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #eee;
+        }
+
+        .top-bar i {
+            margin-right: 5px;
+        }
+        #logo-footer{
+        height: 60px;
+        width: 60px;
+        border-radius: 50%;
+        }
+
+        .social-icons a {
+            color: #333;
+            margin-left: 12px;
+            font-size: 1.1rem;
+        }
+
+        /* Navbar styles */
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+        }
+
+        .brand-text {
+            font-weight: 700;
+            margin-left: 10px;
+            color: #173052;
+        }
+
+        .brand-tagline {
+            display: block;
+            font-size: 0.7rem;
+            color: #6c757d;
+            margin-left: 10px;
+        }
+        .navbar-nav{
+            font-weight: bold;
+        }
+        
+        /* Logo styling */
+        .navbar-logo {
+            height: 40px; /* Default size */
+            transition: all 0.3s ease;
+        }
+        
+        /* Smaller logo when scrolling */
+        .navbar-shrink .navbar-logo {
+            height: 35px;
+        }
+        
+        /* Smooth transition for navbar */
+        #mainNavbar {
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #003366 0%, #1e2326 100%);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Hero section */
+        .hero {
+            padding: 80px 0;
+            background-color: #173052;
+            color: white;
+            background-image: linear-gradient(rgba(23, 48, 82, 0.9), rgba(23, 48, 82, 0.9)),;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero h1 {
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .hero p.lead {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        /* Service cards */
+        .service-card {
+            border: none;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            color: white;
+            font-size: 1.8rem;
+        }
+
+        /* Testimonials */
+        .testimonials .card {
+            border: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .testimonials .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .page-header {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a3a6a 100%);
+            color: white;
+            padding: 80px 0;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Q50,80 0,100 Z" fill="rgba(255,255,255,0.05)"/></svg>') no-repeat;
+            background-size: 100% 100%;
+            height: 5px;
+            opacity: 0.5;
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: #343a40;
+            color: white;
+        }
+
+        footer h5 {
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        footer a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        footer .social-icons a {
+            color: white;
+            font-size: 1.2rem;
+        }
+        .bgg{
+            background-color: #173052;
+        }
+        .brand-tagline{
+            color: red;
+        }
+        
+        /* Mobile-specific fixes */
+        @media (max-width: 767.98px) {
+            /* Adjust top bar for mobile */
+            .top-bar .col-md-8, .top-bar .col-md-4 {
+                text-align: center !important;
+                margin-bottom: 5px;
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
+
+            /* Stack navbar brand elements */
+            .navbar-brand {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .brand-text, .brand-tagline {
+                margin-left: 0;
+            }
+
+            /* Adjust hero section */
+            .hero {
+                padding: 60px 0;
+                text-align: center;
+            }
+
+            .hero .display-4 {
+                font-size: 2.2rem;
+            }
+
+            .hero .btn {
+                display: block;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            /* Stack service cards */
+            .service-card {
+                margin-bottom: 20px;
+            }
+
+            /* Adjust testimonial cards */
+            .testimonials .card {
+                margin-bottom: 20px;
+            }
+
+            /* Fix footer layout */
+            footer .col-lg-4, footer .col-lg-2, footer .col-lg-3 {
+                margin-bottom: 30px;
+            }
+            
+            /* Smaller logo on mobile */
+            .navbar-logo {
+                height: 40px;
+            }
+            
+            .navbar-shrink .navbar-logo {
+                height: 30px;
+            }
+        }
+
+        /* Tablet adjustments */
+        @media (min-width: 768px) and (max-width: 991.98px) {
+            .hero .display-4 {
+                font-size: 2.8rem;
+            }
+        }
+        
+        /* Ensure navbar items stay in one row on desktop */
+        @media (min-width: 992px) {
+            .navbar-collapse {
+                display: flex !important;
+                flex-basis: auto;
+            }
+            .navbar-nav {
+                flex-direction: row;
+            }
+            .nav-item {
+                margin: 0 0.5rem;
+            }
+        }
+        
+        /* Logo and text alignment */
+        .navbar-brand {
+            line-height: 1.2;
+        }
+        
+        /* Larger tap targets for mobile */
+        .nav-link, .dropdown-item {
+            padding: 0.75rem 1rem;
+        }
+        
+        .client-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #f8f9fa;
+            flex-shrink: 0;
+        }
+        
+        .client-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 d-none d-md-block">
+                    <i class="bi bi-envelope"></i> info@qnbtranport.com | 
+                    <i class="bi bi-telephone"></i> +2349029526706| 
+                    <i class="bi bi-clock"></i> Mon-Sat: 7AM - 7PM
+                </div>
+                <div class="col-md-4 text-end social-icons">
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <a href="#"><i class="bi bi-twitter"></i></a>
+                    <a href="#"><i class="bi bi-linkedin"></i></a>
+                    <a href="#"><i class="bi bi-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" id="mainNavbar">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img id="logo-footer" src="/images/QNB LOGO-2.png" alt="Q.N.B Transport" class="img-fluid" style="max-height: 60px;">    
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="services.html">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="analytics.html">Analytics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                        <button class="btn btn-light rounded-pill px-4 fw-bold">Get Quote</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold">Global Shipping Solutions</h1>
+                    <p class="lead">Reliable, efficient, and cost-effective transportation services tailored to your business needs.</p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="services.html" class="btn btn-primary btn-lg">Our Services</a>
+                        <a href="contact.html" class="btn btn-outline-light btn-lg">Get a Quote</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="images/illustration.avif" alt="Shipping Illustration" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Services Overview -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Our Services</h2>
+                <p class="text-muted">Comprehensive logistics solutions for all your shipping needs</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="card service-card h-100">
+                        <div class="card-body text-center">
+                            <div class="service-icon bg-primary">
+                                <i class="bi bi-airplane"></i>
+                            </div>
+                            <h5 class="mt-3">Air Freight</h5>
+                            <p class="text-muted">Fast and reliable air shipping solutions for time-sensitive cargo.</p>
+                            <a href="services.html#air" class="btn btn-sm btn-outline-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card service-card h-100">
+                        <div class="card-body text-center">
+                            <div class="service-icon bg-success">
+                                <i class="bi bi-water"></i>
+                            </div>
+                            <h5 class="mt-3">Ocean Freight</h5>
+                            <p class="text-muted">Cost-effective ocean shipping for large volume shipments.</p>
+                            <a href="services.html#ocean" class="btn btn-sm btn-outline-success">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card service-card h-100">
+                        <div class="card-body text-center">
+                            <div class="service-icon bg-warning">
+                                <i class="bi bi-truck"></i>
+                            </div>
+                            <h5 class="mt-3">Ground Shipping</h5>
+                            <p class="text-muted">Reliable domestic transportation with real-time tracking.</p>
+                            <a href="services.html#ground" class="btn btn-sm btn-outline-warning">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card service-card h-100">
+                        <div class="card-body text-center">
+                            <div class="service-icon bg-info">
+                                <i class="bi bi-building"></i>
+                            </div>
+                            <h5 class="mt-3">Warehousing</h5>
+                            <p class="text-muted">Secure storage and inventory management solutions.</p>
+                            <a href="services.html#warehouse" class="btn btn-sm btn-outline-info">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <a href="services.html" class="btn btn-outline-primary">View All Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <img src="images/transmit.avif" alt="About Q.N.B Transport" class="img-fluid rounded">
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="fw-bold mb-4">About Q.N.B Transport</h2>
+                    <p class="lead">Delivering excellence in logistics since 2003.</p>
+                    <p>Q.N.B Transport has grown from a regional carrier to a global logistics provider, offering comprehensive shipping solutions to businesses of all sizes. Our commitment to reliability, efficiency, and customer service sets us apart in the industry.</p>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> ISO 9001 Certified Operations</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> 24/7 Customer Support</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> Global Network of Partners</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> Real-time Shipment Tracking</li>
+                    </ul>
+                    <a href="about.html" class="btn btn-primary mt-3">Learn More About Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tracking CTA -->
+    <section class="py-5 bg-dark text-white">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h3 class="fw-bold mb-3">Track Your Shipment</h3>
+                    <p class="mb-0">Enter your tracking number to get real-time updates on your shipment's status and location.</p>
+                </div>
+                <div class="col-lg-4">
+                    <form class="d-flex">
+                        <input type="text" class="form-control me-2" placeholder="Tracking Number">
+                        <button type="submit" class="btn btn-danger">Track</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- Testimonials -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">What Our Clients Say</h2>
+            <p class="text-muted">Trusted by businesses worldwide</p>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <div class="mb-3 text-warning">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                        <p class="card-text">"Q.N.B Transport has been instrumental in our global expansion. Their reliability and customer service are unmatched in the industry."</p>
+                        <div class="d-flex align-items-center mt-4">
+                            <div class="avatar-container position-relative" style="width: 66px; height: 66px;">
+                                <img src="images/CEO.jpg" 
+                                     class="rounded-circle position-absolute top-0 start-0 w-100 h-100" 
+                                     alt="MR Uchenna Umenne" 
+                                     style="object-fit: cover; border: 3px solid #f8f9fa; box-sizing: border-box;">
+                            </div>
+                            <div class="ms-3">
+                                <h6 class="mb-0">MR Uchenna Umenne</h6>
+                                <small class="text-muted d-block">CEO, TechGlobal Inc.</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <div class="mb-3 text-warning">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                        <p class="card-text">"Their ocean freight services saved us 30% on shipping costs while maintaining excellent delivery times. Highly recommended!"</p>
+                        <div class="d-flex align-items-center mt-4">
+                            <div class="position-relative" style="width: 66px; height: 66px;">
+                                <img src="images/manger.jpg" 
+                                     class="rounded-circle position-absolute top-0 start-0 w-100 h-100" 
+                                     alt="Mrs Oluchukwu" 
+                                     style="object-fit: cover; border: 3px solid #f8f9fa; padding: 2px;">
+                            </div>
+                            <div class="ms-3">
+                                <h6 class="mb-0">Mrs Oluchukwu</h6>
+                                <small class="text-muted d-block">Logistics Manager, Oceanic Imports</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <div class="mb-3 text-warning">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                        </div>
+                        <p class="card-text">"The real-time tracking and notifications give us complete visibility of our shipments. It's transformed our supply chain management."</p>
+                        <div class="d-flex align-items-center mt-4">
+                            <div class="client-avatar">
+                                <img src="images/cfd.jpg" alt="Mrs Ebere">
+                            </div>
+                            <div class="ms-3">
+                                <h6 class="mb-0">Mrs Ebere</h6>
+                                <small class="text-muted d-block">Operations Director, EuroFashion</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- CTA Section -->
+    <section class="py-5 bgg text-white">
+        <div class="container text-center">
+            <h2 class="fw-bold mb-4">Ready to Ship With Us?</h2>
+            <p class="lead mb-5">Join thousands of satisfied customers who trust Q.N.B Transport for their logistics needs.</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="contact.html" class="btn btn-light btn-lg">Get a Quote</a>
+                <a href="contact.html" class="btn btn-outline-light btn-lg">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-4 pb-3">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Company Info - Full width on mobile, 4 cols on desktop -->
+                <div class="col-12 col-lg-4 mb-3 mb-lg-0">
+                    <div class="text-center text-lg-start">
+                        <img id="logo-footer" src="/images/QNB LOGO-2.png" alt="Q.N.B Transport" class="img-fluid" style="max-height: 60px;">
+                        <p class="mt-3 mb-2">Think Local, Ship Global. Providing world-class logistics solutions since 2003.</p>
+                        <div class="social-icons d-flex justify-content-center justify-content-lg-start">
+                            <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+                            <a href="#" class="text-white me-3"><i class="bi bi-twitter"></i></a>
+                            <a href="#" class="text-white me-3"><i class="bi bi-linkedin"></i></a>
+                            <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Quick Links - 6 cols on mobile, 2 cols on desktop -->
+                <div class="col-6 col-lg-2">
+                    <h5 class="h6 mb-3 text-center text-lg-start">Quick Links</h5>
+                    <ul class="list-unstyled text-center text-lg-start">
+                        <li class="mb-2"><a href="index.html" class="text-white text-decoration-none">Home</a></li>
+                        <li class="mb-2"><a href="about.html" class="text-white text-decoration-none">About Us</a></li>
+                        <li class="mb-2"><a href="services.html" class="text-white text-decoration-none">Services</a></li>
+                        <li class="mb-2"><a href="tracking.html" class="text-white text-decoration-none">Tracking</a></li>
+                        <li class="mb-2"><a href="contact.html" class="text-white text-decoration-none">Contact</a></li>
+                    </ul>
+                </div>
+    
+                <!-- Services - 6 cols on mobile, 3 cols on desktop -->
+                <div class="col-6 col-lg-3">
+                    <h5 class="h6 mb-3 text-center text-lg-start">Services</h5>
+                    <ul class="list-unstyled text-center text-lg-start">
+                        <li class="mb-2"><a href="services.html#air" class="text-white text-decoration-none">Air Freight</a></li>
+                        <li class="mb-2"><a href="services.html#ocean" class="text-white text-decoration-none">Ocean Freight</a></li>
+                        <li class="mb-2"><a href="services.html#ground" class="text-white text-decoration-none">Ground Shipping</a></li>
+                        <li class="mb-2"><a href="services.html#warehouse" class="text-white text-decoration-none">Warehousing</a></li>
+                        <li class="mb-2"><a href="services.html#logistics" class="text-white text-decoration-none">Logistics Solutions</a></li>
+                    </ul>
+                </div>
+    
+                <!-- Contact - Full width on mobile, 3 cols on desktop -->
+                <div class="col-12 col-lg-3">
+                    <h5 class="h6 mb-3 text-center text-lg-start">Contact Us</h5>
+                    <address class="text-center text-lg-start mb-0">
+                        <i class="bi bi-geo-alt"></i> #48 OKIGWE ROAD<br>
+                        Aba Abia State<br>
+                        Nigeria<br>
+                        <i class="bi bi-telephone"></i> +2349029526706<br>
+                        <i class="bi bi-envelope"></i> qnbhelpdesk@yahoo.com
+                    </address>
+                </div>
+            </div>
+    
+            <hr class="my-3">
+    
+            <!-- Copyright - Stacked on mobile, side-by-side on desktop -->
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
+                    <p class="mb-0 small">&copy; 2023 Q.N.B Transport. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="text-white text-decoration-none small me-3">Privacy Policy</a>
+                    <a href="#" class="text-white text-decoration-none small me-3">Terms of Service</a>
+                    <a href="#" class="text-white text-decoration-none small">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Mobile overflow prevention
+        document.addEventListener('DOMContentLoaded', function() {
+            // Prevent horizontal scrolling
+            document.documentElement.style.overflowX = 'hidden';
+            document.body.style.overflowX = 'hidden';
+            
+            // Make sure all images are responsive
+            document.querySelectorAll('img').forEach(img => {
+                img.style.maxWidth = '100%';
+                img.style.height = 'auto';
+            });
+            
+            // Fix for Bootstrap's negative margins on mobile
+            if (window.innerWidth < 768) {
+                document.querySelectorAll('.row').forEach(row => {
+                    row.style.marginLeft = '0';
+                    row.style.marginRight = '0';
+                });
+            }
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth < 768) {
+                document.querySelectorAll('.row').forEach(row => {
+                    row.style.marginLeft = '0';
+                    row.style.marginRight = '0';
+                });
+            } else {
+                document.querySelectorAll('.row').forEach(row => {
+                    row.style.marginLeft = '';
+                    row.style.marginRight = '';
+                });
+            }
+        });
+        
+        // Shrink logo on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('mainNavbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-shrink');
+            } else {
+                navbar.classList.remove('navbar-shrink');
+            }
+        });
+    </script>
+</body>
+</html>

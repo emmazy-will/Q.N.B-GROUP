@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Q.N.B Transport</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Prevent horizontal scrolling and set base styles */
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Responsive images and media */
+        img, iframe, video {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Container adjustments */
+        .container, .container-fluid {
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+
+        /* Top bar adjustments */
+        .top-bar {
+            font-size: 0.9rem;
+            padding: 8px 0;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #eee;
+        }
+
+        .top-bar i {
+            margin-right: 5px;
+        }
+        #logo-footer{
+        height: 60px;
+        width: 60px;
+        border-radius: 50%;
+        }
+
+        .social-icons a {
+            color: #333;
+            margin-left: 12px;
+            font-size: 1.1rem;
+        }
+
+        /* Navbar styles */
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+        }
+
+        .brand-text {
+            font-weight: 700;
+            margin-left: 10px;
+            color: #173052;
+        }
+
+        .brand-tagline {
+            display: block;
+            font-size: 0.7rem;
+            color: #6c757d;
+            margin-left: 10px;
+        }
+        .navbar {
+            background: linear-gradient(135deg, #003366 0%, #22272a 100%);
+            color: aqua;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .page-header {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a3a6a 100%);
+            color: white;
+            padding: 80px 0;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Q50,80 0,100 Z" fill="rgba(255,255,255,0.05)"/></svg>') no-repeat;
+            background-size: 100% 100%;
+            opacity: 0.5;
+        }
+        .nav-link{
+            color: #f8f9fa;
+        }
+        
+
+        /* Hero section */
+        
+
+    </style>
+</head>
+<body>
+    <!-- Top Bar (same as index.html) -->
+    <!-- Navigation (same as index.html) -->
+        <nav class="navbar navbar-expand-lg navbar-dark sticky-top" id="mainNavbar">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img id="logo-footer" src="images/QNB LOGO-2.png" alt="Q.N.B Transport" class="img-fluid" style="max-height: 60px;">    
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="services.html">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="analytics.html">Analytics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                        <button class="btn btn-light rounded-pill px-4 fw-bold">Get Quote</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h1>Contact Us</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body p-4 p-md-5">
+                            <h2 class="text-center mb-4">Get in Touch</h2>
+                            <p class="text-center text-muted mb-4">Have questions about our services or need a shipping quote? Fill out the form below and we'll get back to you within 24 hours.</p>
+                            
+                            <form id="contactForm">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="firstName" class="form-label">First Name</label>
+                                        <input type="text" class="form-control" id="firstName" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="lastName" class="form-label">Last Name</label>
+                                        <input type="text" class="form-control" id="lastName" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="email" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="phone" class="form-label">Phone</label>
+                                        <input type="tel" class="form-control" id="phone">
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="company" class="form-label">Company (Optional)</label>
+                                        <input type="text" class="form-control" id="company">
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="subject" class="form-label">Subject</label>
+                                        <select class="form-select" id="subject" required>
+                                            <option value="" selected disabled>Select a subject</option>
+                                            <option value="quote">Request a Quote</option>
+                                            <option value="tracking">Tracking Inquiry</option>
+                                            <option value="service">Service Information</option>
+                                            <option value="account">Account Support</option>
+                                            <option value="other">Other Inquiry</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="message" class="form-label">Message</label>
+                                        <textarea class="form-control" id="message" rows="5" required></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="newsletter">
+                                            <label class="form-check-label" for="newsletter">
+                                                Subscribe to our newsletter for updates and promotions
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mt-4">
+                                        <button type="submit" class="btn btn-primary btn-lg w-100" id="submitBtn">
+                                            <span id="submitText">Send Message</span>
+                                            <span id="submitSpinner" class="spinner-border spinner-border-sm d-none"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                            
+                            <div id="successMessage" class="alert alert-success mt-4 d-none">
+                                <i class="bi bi-check-circle-fill"></i> Thank you for your message! We'll get back to you soon.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Info -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Our Offices</h2>
+                <p class="text-muted">Global network with local expertise</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="icon-box bg-primary">
+                                <i class="bi bi-geo-alt"></i>
+                            </div>
+                            <h4 class="mt-3">Headquarters</h4>
+                            <address>
+                                #48 OKIGWE ROAD<br>
+                                Aba Abia State<br>
+                            </address>
+                            <p>
+                                <i class="bi bi-telephone"></i> +2349079308579<br>
+                                <i class="bi bi-envelope"></i> qnbhelpdesk@yahoo.com
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="icon-box bg-success">
+                                <i class="bi bi-geo-alt"></i>
+                            </div>
+                            <h4 class="mt-3">Port-Hacourt Office</h4>
+                            <address>
+                                #93 ODANI ROAD<br>
+                                Elelenwo Port-Hacourt<br>
+                                Nigeria
+                            </address>
+                            <p>
+                                <i class="bi bi-telephone"></i> +2349029526706<br>
+                                <i class="bi bi-envelope"></i> qnbhelpdesk@gmail.com
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="icon-box bg-warning">
+                                <i class="bi bi-geo-alt"></i>
+                            </div>
+                            <h4 class="mt-3">Anambara Office</h4>
+                            <address>
+                                ONONENYI AMECHI PLAZA<br>
+                                #2 Akwa Road<br>
+                                ONISTHA
+                            </address>
+                            <p>
+                                <i class="bi bi-telephone"></i> +65 6123 4567<br>
+                                <i class="bi bi-envelope"></i> qnbhelpdesk@yahoo.com
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- Map -->
+<section class="py-5">
+    <div class="container">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-0">
+                <div class="ratio ratio-16x9">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3979.803678286902!2d7.358609814758559!3d5.120533896318489!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1042993115290d71%3A0x4e64fd7d5a9a6a8a!2sAba%2C%20Abia%20State%2C%20Nigeria!5e0!3m2!1sen!2sus!4v1689872044702!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- CTA -->
+    <section class="py-5 bg-primary text-white">
+        <div class="container text-center">
+            <h2 class="fw-bold mb-4">Ready to Ship With Us?</h2>
+            <p class="lead mb-5">Get a free quote today and discover how we can streamline your logistics.</p>
+            <a href="#contactForm" class="btn btn-light btn-lg">Get a Free Quote</a>
+        </div>
+    </section>
+
+    <!-- Footer (same as index.html) -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
