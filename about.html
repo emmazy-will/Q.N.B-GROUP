@@ -639,13 +639,194 @@
                 </div>
             </div>
             <div class="text-center mt-5">
-                <a href="#" class="btn btn-primary btn-lg">Learn More About Our Green Initiatives</a>
+                <a href="#" class="btn btn btn-lg" style="background: linear-gradient(90deg, #9c8cac, #758eff, #7ebaff);">Learn More About Our Green Initiatives</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="process-section py-5 py-lg-7 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold">Our Seamless Shipping Process</h2>
+                <p class="lead text-muted">From origin to destination - transparent and efficient</p>
+            </div>
+    
+            <!-- Process Video with Steps -->
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-6">
+                    <div class="process-video-container shadow-lg rounded-3 overflow-hidden">
+                        <video id="processVideo" class="w-100" autoplay muted loop playsinline>
+                            <source src="/images/import.mp4" type="video/mp4">
+                            <source src="videos/shipping-process.webm" type="video/webm">
+                            Your browser doesn't support HTML5 video.
+                        </video>
+                    </div>
+                </div>
+    
+                <div class="col-lg-6">
+                    <div class="process-steps">
+                        <div class="step active" data-time="0">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Documentation & Booking</h4>
+                                <p>We handle all export/import documentation and secure optimal vessel space.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step" data-time="10">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Cargo Collection</h4>
+                                <p>Our team collects your goods with full inventory verification.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step" data-time="20">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Customs Clearance</h4>
+                                <p>Expert handling of all customs procedures at origin port.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step" data-time="30">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h4>Ocean Transport</h4>
+                                <p>Secure container loading and real-time ocean tracking.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step" data-time="45">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <h4>Destination Handling</h4>
+                                <p>Port operations and import customs clearance.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step" data-time="60">
+                            <div class="step-number">6</div>
+                            <div class="step-content">
+                                <h4>Final Delivery</h4>
+                                <p>Last-mile logistics to your specified location.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
     
+    <style>
+    .process-section {
+        position: relative;
+    }
+    
+    .process-video-container {
+        position: relative;
+        background: #000;
+        border: 1px solid rgba(0,0,0,0.1);
+    }
+    
+    .process-steps {
+        position: relative;
+        padding-left: 2rem;
+    }
+    
+    .step {
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        border-left: 3px solid #e9ecef;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    
+    .step.active {
+        border-left: 3px solid #0d6efd;
+        background: rgba(13, 110, 253, 0.05);
+    }
+    
+    .step-number {
+        position: absolute;
+        left: -1rem;
+        width: 2rem;
+        height: 2rem;
+        background: #0d6efd;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+    }
+    
+    .step-content {
+        margin-left: 1.5rem;
+    }
+    
+    .step h4 {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+    
+    .step p {
+        color: #6c757d;
+        margin-bottom: 0;
+    }
+    </style>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const video = document.getElementById('processVideo');
+        const steps = document.querySelectorAll('.step');
+        
+        // Auto-play the video (with fallback for browsers that block autoplay)
+        const playVideo = () => {
+            const promise = video.play();
+            if (promise !== undefined) {
+                promise.catch(error => {
+                    // Auto-play was prevented, show fallback
+                    video.controls = true;
+                });
+            }
+        };
+        
+        // Start playback
+        playVideo();
+        
+        // Highlight steps based on video time
+        video.addEventListener('timeupdate', function() {
+            const currentTime = video.currentTime;
+            
+            steps.forEach(step => {
+                const stepTime = parseFloat(step.getAttribute('data-time'));
+                step.classList.remove('active');
+                
+                if (currentTime >= stepTime) {
+                    step.classList.add('active');
+                }
+            });
+        });
+        
+        // Click step to jump to specific time
+        steps.forEach(step => {
+            step.addEventListener('click', function() {
+                const stepTime = parseFloat(this.getAttribute('data-time'));
+                video.currentTime = stepTime;
+            });
+        });
+        
+        // Restart video when it ends
+        video.addEventListener('ended', function() {
+            video.currentTime = 0;
+            video.play();
+        });
+    });
+    </script>
+    
     <!-- CTA -->
-    <section class="py-5 bg-primary text-white">
+    <section class="py-5  text-white" style="background: linear-gradient(90deg, #185b8e, #42557f, #583b75);">
         <div class="container text-center">
             <h2 class="fw-bold mb-4">Join Our Growing Network</h2>
             <p class="lead mb-5">Partner with Q.N.B Transport for your logistics needs and experience the difference.</p>
@@ -677,6 +858,7 @@
                         <li><a href="services.html">Services</a></li>
                         <li><a href="analytics.html">Analytics</a></li>
                         <li><a href="about.html">About Us</a></li>
+                        <li><a href="tracking.html">Tracking</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
@@ -694,14 +876,15 @@
                 </div>
                 
                 <!-- Contact Column -->
-                <div class="col-lg-3 col-md-6 footer-col">
-                    <h5 class="footer-heading">Contact Us</h5>
-                    <div class="footer-contact">
-                        <p><i class="bi bi-geo-alt-fill"></i> 123 Logistics Way, City, ST 12345</p>
-                        <p><i class="bi bi-telephone-fill"></i> +1 (123) 456-7890</p>
-                        <p><i class="bi bi-envelope-fill"></i> info@qnbtranport.com</p>
-                        <p><i class="bi bi-clock-fill"></i> Mon-Fri: 8AM - 6PM</p>
-                    </div>
+                <div class="col-12 col-lg-3">
+                    <h5 class="h6 mb-3 text-center text-lg-start">Contact Us</h5>
+                    <address class="text-center text-lg-start mb-0">
+                        <i class="bi bi-geo-alt"></i> #48 OKIGWE ROAD<br>
+                        Aba Abia State<br>
+                        Nigeria<br>
+                        <i class="bi bi-telephone"></i> +2349029526706<br>
+                        <i class="bi bi-envelope"></i> qnbhelpdesk@yahoo.com
+                    </address>
                 </div>
             </div>
             
